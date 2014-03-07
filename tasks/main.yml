@@ -1,0 +1,36 @@
+---
+- name: Download ruby.
+  get_url: >
+    url={{ ruby_download_url }}
+    dest={{ workspace }}/ruby-{{ ruby_version }}.tar
+
+- name: Extract ruby.
+  command: >
+    tar -zxf {{ workspace }}/ruby-{{ ruby_version }}.tar
+    chdir={{ workspace }}
+    creates={{ workspace }}/ruby-{{ ruby_version }}
+
+- name: Build ruby.
+  command: >
+    {{ item }}
+    chdir={{ workspace }}/ruby-{{ ruby_version }}
+    creates=/usr/local/bin/ruby
+  with_items:
+    - ./configure
+    - make
+    - sudo make install
+
+- name: Add ruby symlinks.
+  file: src=/usr/local/bin/{{ item }} dest=/usr/bin/{{ item }} state=link
+  with_items:
+    - erb
+    - gem
+    - irb
+    - rake
+    - rdoc
+    - ruby_version
+    - ruby
+    - testrb
+
+- name: Install the Bundler Gem.
+  gem: name=bundler state=present user_install=no
