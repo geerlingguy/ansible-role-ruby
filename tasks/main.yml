@@ -34,3 +34,6 @@
 
 - name: Install the Bundler Gem.
   gem: name=bundler state=present user_install=no
+
+- name: Add bundle symlink.
+  file: src=/usr/local/bin/bundle dest=/usr/bin/bundle state=link
