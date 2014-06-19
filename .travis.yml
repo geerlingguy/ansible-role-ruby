@@ -8,7 +8,7 @@ env:
 before_install:
   - sudo apt-get update -qq
   - sudo dpkg -l | grep ruby
-  - sudo apt-get purge -y ruby
+  - sudo apt-get purge -y ruby ruby1.8
 
 install:
   # Install Ansible.
@@ -32,4 +32,4 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Make sure Ruby is installed.
-  - ruby -v
+  - /usr/local/bin/ruby -v

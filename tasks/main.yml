@@ -21,7 +21,10 @@
     - sudo make install
 
 - name: Add ruby symlinks.
-  file: src=/usr/local/bin/{{ item }} dest=/usr/bin/{{ item }} state=link
+  file: >
+    src=/usr/local/bin/{{ item }}
+    dest=/usr/bin/{{ item }}
+    state=link
   with_items:
     - erb
     - gem
