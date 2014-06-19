@@ -28,7 +28,6 @@
     - irb
     - rake
     - rdoc
-    - ruby_version
     - ruby
     - testrb
 
