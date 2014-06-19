@@ -7,6 +7,8 @@ env:
 
 before_install:
   - sudo apt-get update -qq
+  - sudo dpkg -l | grep ruby
+  - sudo apt-get purge -y ruby
 
 install:
   # Install Ansible.
