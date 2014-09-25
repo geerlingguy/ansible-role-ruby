@@ -16,7 +16,7 @@
     chdir={{ workspace }}/ruby-{{ ruby_version }}
     creates=/usr/local/bin/ruby
   with_items:
-    - ./configure
+    - ./configure --enable-shared
     - make
     - sudo make install
 
