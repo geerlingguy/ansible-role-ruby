@@ -1,4 +1,20 @@
 ---
+- name: Ensure zlib-devel is installed (RedHat)
+  yum: name=zlib-devel state=latest
+  when: ansible_os_family == "RedHat"
+
+- name: Ensure zlib1g-dev is installed (Ubuntu 14.04)
+  apt: name=zlib1g-dev state=latest
+  when: ansible_os_family == "Debian" and ansible_distribution_version == "14.04"
+
+- name: Ensure openssl-static is installed (RedHat)
+  yum: name=openssl-static state=latest
+  when: ansible_os_family == "RedHat"
+
+- name: Ensure libssl-dev is installed (Ubuntu 14.04)
+  apt: name=libssl-dev state-latest
+  when: ansible_os_family == "Debian" and ansible_distribution_version == "14.04"
+
 - name: Download ruby.
   get_url: >
     url={{ ruby_download_url }}
