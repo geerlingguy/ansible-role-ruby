@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-ruby.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-ruby)
 
-Installs Ruby and bundler gem on Linux/UNIX.
+Installs Ruby and bundler gem on Linux.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ None.
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `vars/main.yml`):
+Available variables are listed below, along with default values (see `defaults/main.yml`):
 
     workspace: /root
 
