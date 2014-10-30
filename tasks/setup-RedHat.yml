@@ -1,0 +1,6 @@
+---
+- name: Install packages required to build ruby.
+  yum: "pkg={{ item }} state=installed"
+  with_items:
+    - zlib-devel
+    - openssl-static

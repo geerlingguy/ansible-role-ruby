@@ -1,0 +1,9 @@
+---
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=86400
+
+- name: Install packages required to build ruby.
+  apt: "pkg={{ item }} state=installed"
+  with_items:
+    - zlib1g-dev
+    - libssl-dev

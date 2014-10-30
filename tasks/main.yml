@@ -1,4 +1,12 @@
 ---
+# Include OS-specific installation tasks.
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+# Download and build Ruby.
 - name: Download ruby.
   get_url: >
     url={{ ruby_download_url }}
