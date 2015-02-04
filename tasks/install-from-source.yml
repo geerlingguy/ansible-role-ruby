@@ -50,7 +50,7 @@
     - rake
     - rdoc
     - ruby
-    - testrb
+    # - testrb
 
 - name: Install the Bundler Gem.
   gem: name=bundler state=present user_install=no

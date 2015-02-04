@@ -8,7 +8,7 @@ env:
     RUBY_PATH_PREFIX=/usr/local
   - SITE=test-install-package.yml
     RUBY_VERSION=1.9.3
-    RUBY_PATH_PREFIX=/usr
+    RUBY_PATH_PREFIX=/home/travis/.rvm/rubies/ruby-1.9.3-p551
 
 before_install:
   - sudo apt-get update -qq
