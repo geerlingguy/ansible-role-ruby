@@ -16,13 +16,17 @@ Available variables are listed below, along with default values (see `defaults/m
 
 The location where temporary files will be downloaded in preparation for Ruby installation.
 
-    ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.4.tar.gz
+    ruby_install_from_source: false
 
-The URL from which Ruby will be downloaded.
+By default, this role will install whatever version of ruby is available through your system's package manager (`apt` or `yum`). You can install whatever version you like (including the latest release) by setting this to `true` and/or updating the `ruby_download_url` and `ruby_version`.
 
-    ruby_version: 2.1.4
+    ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.0.tar.gz
 
-The version of ruby that will be installed.
+The URL from which Ruby will be downloaded (only used if `ruby_install_from_source` is `true`).
+
+    ruby_version: 2.2.0
+
+The version of ruby that will be installed (only used if `ruby_install_from_source` is `true`).
 
 ## Dependencies
 

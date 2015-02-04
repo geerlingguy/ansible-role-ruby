@@ -1,49 +1,11 @@
 ---
 # Include OS-specific installation tasks.
 - include: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+  when: (ruby_install_from_source == false) and (ansible_os_family == 'RedHat')
 
 - include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: (ruby_install_from_source == false) and (ansible_os_family == 'Debian')
 
-# Download and build Ruby.
-- name: Download ruby.
-  get_url: >
-    url={{ ruby_download_url }}
-    dest={{ workspace }}/ruby-{{ ruby_version }}.tar
-
-- name: Extract ruby.
-  command: >
-    tar -zxf {{ workspace }}/ruby-{{ ruby_version }}.tar
-    chdir={{ workspace }}
-    creates={{ workspace }}/ruby-{{ ruby_version }}
-
-- name: Build ruby.
-  command: >
-    {{ item }}
-    chdir={{ workspace }}/ruby-{{ ruby_version }}
-    creates=/usr/local/bin/ruby
-  with_items:
-    - ./configure --enable-shared
-    - make
-    - sudo make install
-
-- name: Add ruby symlinks.
-  file: >
-    src=/usr/local/bin/{{ item }}
-    dest=/usr/bin/{{ item }}
-    state=link
-  with_items:
-    - erb
-    - gem
-    - irb
-    - rake
-    - rdoc
-    - ruby
-    - testrb
-
-- name: Install the Bundler Gem.
-  gem: name=bundler state=present user_install=no
-
-- name: Add bundle symlink.
-  file: src=/usr/local/bin/bundle dest=/usr/bin/bundle state=link
+# Install ruby from source when ruby_install_from_source is true.
+- include: install-from-source.yml
+  when: ruby_install_from_source == true
