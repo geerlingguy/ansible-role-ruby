@@ -1,4 +1,4 @@
 ---
 workspace: /root
-ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.4.tar.gz
-ruby_version: 2.1.4
+ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.0.tar.gz
+ruby_version: 2.2.0
