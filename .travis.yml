@@ -3,7 +3,12 @@ language: python
 python: "2.7"
 
 env:
-  - SITE=test.yml
+  - SITE=test-install-from-source.yml
+    RUBY_VERSION=2.2.0
+    RUBY_PATH_PREFIX=/usr/local
+  - SITE=test-install-package.yml
+    RUBY_VERSION=1.9.3
+    RUBY_PATH_PREFIX=/usr
 
 before_install:
   - sudo apt-get update -qq
@@ -11,6 +16,9 @@ before_install:
 install:
   # Install Ansible.
   - pip install ansible
+
+  # Ensure ruby is not installed.
+  - sudo apt-get purge -y ruby
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
@@ -29,4 +37,14 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  # TODO: Test GlusterFS.
+  # Make sure ruby is installed and at the correct version.
+  - which ruby
+  - test -x $RUBY_PATH_PREFIX/bin/ruby
+
+  - ruby --version
+  - $RUBY_PATH_PREFIX/bin/ruby --version | grep -qF "$RUBY_VERSION"
+
+after_failure:
+  # If we failed, it's likely due to Travis environment changes.
+  - which ruby
+  - ruby --version
