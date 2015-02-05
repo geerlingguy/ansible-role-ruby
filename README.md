@@ -16,6 +16,10 @@ Available variables are listed below, along with default values (see `defaults/m
 
 The location where temporary files will be downloaded in preparation for Ruby installation.
 
+    ruby_install_gems: []
+
+A list of Ruby gems to install (just the name of the gem to be installed). This is meant as a simple convenience, and will only install the latest version of the gem. If you need to install gems with more options or specificity, you can do so elsewhere in your playbook.
+
     ruby_install_from_source: false
 
 By default, this role will install whatever version of ruby is available through your system's package manager (`apt` or `yum`). You can install whatever version you like (including the latest release) by setting this to `true` and/or updating the `ruby_download_url` and `ruby_version`.

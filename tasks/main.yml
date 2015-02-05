@@ -9,3 +9,7 @@
 # Install ruby from source when ruby_install_from_source is true.
 - include: install-from-source.yml
   when: ruby_install_from_source == true
+
+- name: Install configured gems.
+  gem: "name={{ item }} state=present"
+  with_items: ruby_install_gems
