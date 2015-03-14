@@ -24,7 +24,7 @@ A list of Ruby gems to install (just the name of the gem to be installed). This 
 
 By default, this role will install whatever version of ruby is available through your system's package manager (`apt` or `yum`). You can install whatever version you like (including the latest release) by setting this to `true` and/or updating the `ruby_download_url` and `ruby_version`.
 
-    ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.0.tar.gz
+    ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.1.tar.gz
 
 The URL from which Ruby will be downloaded (only used if `ruby_install_from_source` is `true`).
 
