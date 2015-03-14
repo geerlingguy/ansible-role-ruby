@@ -28,7 +28,7 @@ By default, this role will install whatever version of ruby is available through
 
 The URL from which Ruby will be downloaded (only used if `ruby_install_from_source` is `true`).
 
-    ruby_version: 2.2.0
+    ruby_version: 2.2.1
 
 The version of ruby that will be installed (only used if `ruby_install_from_source` is `true`).
 
