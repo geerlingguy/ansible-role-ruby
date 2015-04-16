@@ -15,6 +15,13 @@
   with_items:
     - zlib1g-dev
     - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm3
+    - libgdbm-dev
   when: ansible_os_family == 'Debian'
 
 - name: Download ruby.
