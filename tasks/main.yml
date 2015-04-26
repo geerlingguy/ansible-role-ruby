@@ -10,6 +10,12 @@
 - include: install-from-source.yml
   when: ruby_install_from_source == true
 
+- name: Install the Bundler Gem.
+  gem: name=bundler state=present user_install=no
+
+- name: Add bundle symlink.
+  file: src=/usr/local/bin/bundle dest=/usr/bin/bundle state=link
+
 - name: Install configured gems.
   gem: "name={{ item }} state=present"
   with_items: ruby_install_gems
