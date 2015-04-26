@@ -10,6 +10,27 @@
 - include: install-from-source.yml
   when: ruby_install_from_source == true
 
+# Install rubygems manually when using the package manager.
+- name: Download rubygems.
+  get_url: >
+    url={{ rubygems_download_url }}
+    dest={{ workspace }}/rubygems-{{ rubygems_version }}.tar
+  when: ruby_install_from_source == false
+
+- name: Extract rubygems.
+  command: >
+    tar -zxf {{ workspace }}/rubygems-{{ rubygems_version }}.tar
+    chdir={{ workspace }}
+    creates={{ workspace }}/rubygems-{{ rubygems_version }}
+  when: ruby_install_from_source == false  
+
+- name: Install rubygems.
+  command: >
+    ruby setup.rb
+    chdir={{ workspace }}/rubygems-{{ rubygems_version }}
+    creates=/usr/local/bin/gem
+  when: ruby_install_from_source == false  
+
 - name: Install the Bundler Gem.
   gem: name=bundler state=present user_install=no
 
