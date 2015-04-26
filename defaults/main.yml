@@ -9,3 +9,8 @@ ruby_install_gems: []
 ruby_install_from_source: false
 ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.1.tar.gz
 ruby_version: 2.2.1
+
+# If installing using a package manager, rubygems will be installed 
+# manually using the below settings.
+rubygems_download_url: http://production.cf.rubygems.org/rubygems/rubygems-2.4.6.tgz
+rubygems_version: 2.4.6
