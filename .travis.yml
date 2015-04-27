@@ -44,6 +44,8 @@ script:
   - ruby --version
   - $RUBY_PATH_PREFIX/bin/ruby --version | grep -qF "$RUBY_VERSION"
 
+  - which bundle
+
 after_failure:
   # If we failed, it's likely due to Travis environment changes.
   - which ruby
