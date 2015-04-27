@@ -4,7 +4,7 @@ python: "2.7"
 
 env:
   - SITE=test-install-from-source.yml
-    RUBY_VERSION=2.2.0
+    RUBY_VERSION=2.2.2
     RUBY_PATH_PREFIX=/usr/local
   - SITE=test-install-package.yml
     RUBY_VERSION=1.9.3
@@ -43,6 +43,8 @@ script:
 
   - ruby --version
   - $RUBY_PATH_PREFIX/bin/ruby --version | grep -qF "$RUBY_VERSION"
+
+  - which bundle
 
 after_failure:
   # If we failed, it's likely due to Travis environment changes.

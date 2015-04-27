@@ -1,3 +1,6 @@
 ---
-- name: Install ruby.
-  yum: name=ruby state=present
+- name: Install ruby and rubygems.
+  yum: "name={{ items }} state=present"
+  with_items:
+    - ruby
+    - rubygems
