@@ -16,6 +16,10 @@ Available variables are listed below, along with default values (see `defaults/m
 
 The location where temporary files will be downloaded in preparation for Ruby installation.
 
+    ruby_rubygems_package_name: rubygems
+
+The name of the `rubygems` package. Generally, the default should work; but it will be set to `rubygems-integration` automatically on Ubuntu Trusty (14.04).
+
     ruby_install_gems: []
 
 A list of Ruby gems to install (just the name of the gem to be installed). This is meant as a simple convenience, and will only install the latest version of the gem. If you need to install gems with more options or specificity, you can do so elsewhere in your playbook.
