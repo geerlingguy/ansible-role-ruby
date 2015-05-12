@@ -3,4 +3,4 @@
   yum: "name={{ item }} state=present"
   with_items:
     - ruby
-    - rubygems
+    - "{{ ruby_rubygems_package_name }}"

@@ -9,3 +9,5 @@ ruby_install_gems: []
 ruby_install_from_source: false
 ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz
 ruby_version: 2.2.2
+
+ruby_rubygems_package_name: rubygems
