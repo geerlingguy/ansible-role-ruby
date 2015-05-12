@@ -28,7 +28,9 @@ galaxy_info:
     - all
   - name: Ubuntu
     versions:
-    - all
+    - lucid
+    - trusty
+    - precise
   - name: SLES
     versions:
     - all
