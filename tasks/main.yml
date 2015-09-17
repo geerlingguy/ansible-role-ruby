@@ -19,5 +19,5 @@
   when: ruby_install_from_source == true
 
 - name: Install configured gems.
-  gem: "name={{ item }} state=present"
+  gem: "name={{ item }} state=present user_install={{ user_install }}"
   with_items: ruby_install_gems

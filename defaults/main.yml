@@ -11,3 +11,4 @@ ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz
 ruby_version: 2.2.2
 
 ruby_rubygems_package_name: rubygems
+user_install: no
