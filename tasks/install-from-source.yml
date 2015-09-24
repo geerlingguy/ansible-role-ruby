@@ -1,6 +1,6 @@
 ---
 - name: Install packages required to build ruby (RedHat).
-  yum: "pkg={{ item }} state=installed"
+  yum: "name={{ item }} state=present"
   with_items:
     - zlib-devel
     - openssl-static
@@ -11,7 +11,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install packages required to build ruby (Debian).
-  apt: "pkg={{ item }} state=installed"
+  apt: "name={{ item }} state=present"
   with_items:
     - zlib1g-dev
     - libssl-dev
@@ -25,9 +25,9 @@
   when: ansible_os_family == 'Debian'
 
 - name: Download ruby.
-  get_url: >
-    url={{ ruby_download_url }}
-    dest={{ workspace }}/ruby-{{ ruby_version }}.tar
+  get_url:
+    url: "{{ ruby_download_url }}"
+    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar"
 
 - name: Extract ruby.
   unarchive:
@@ -46,11 +46,11 @@
     - sudo make install
 
 - name: Add ruby symlinks.
-  file: >
-    src=/usr/local/bin/{{ item }}
-    dest=/usr/bin/{{ item }}
-    state=link
-    force=yes
+  file:
+    src: "/usr/local/bin/{{ item }}"
+    dest: "/usr/bin/{{ item }}"
+    state: link
+    force: yes
   with_items:
     - erb
     - gem
@@ -58,4 +58,3 @@
     - rake
     - rdoc
     - ruby
-    # - testrb
