@@ -32,7 +32,7 @@
 - name: Extract ruby.
   unarchive:
     src: "{{ workspace }}/ruby-{{ ruby_version }}.tar"
-    dest: "{{ workspace }}/ruby-{{ ruby_version }}"
+    dest: "{{ workspace }}/"
     copy: no
 
 - name: Build ruby.
