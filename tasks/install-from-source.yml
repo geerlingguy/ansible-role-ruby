@@ -30,10 +30,10 @@
     dest={{ workspace }}/ruby-{{ ruby_version }}.tar
 
 - name: Extract ruby.
-  command: >
-    tar -zxf {{ workspace }}/ruby-{{ ruby_version }}.tar
-    chdir={{ workspace }}
-    creates={{ workspace }}/ruby-{{ ruby_version }}
+  unarchive:
+    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar"
+    dest: "{{ workspace }}/ruby-{{ ruby_version }}"
+    copy: no
 
 - name: Build ruby.
   command: >
