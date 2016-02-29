@@ -23,4 +23,4 @@
   gem: "name={{ item }} state=present"
   become: yes
   become_user: "{{ ruby_install_gems_user }}"
-  with_items: ruby_install_gems
+  with_items: "{{ ruby_install_gems }}"
