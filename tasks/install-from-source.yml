@@ -27,11 +27,11 @@
 - name: Download ruby.
   get_url:
     url: "{{ ruby_download_url }}"
-    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar"
+    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
 
 - name: Extract ruby.
   unarchive:
-    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar"
+    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
     dest: "{{ workspace }}/"
     copy: no
 
