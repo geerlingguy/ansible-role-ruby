@@ -17,7 +17,25 @@
 - name: Define ruby_install_gems_user.
   set_fact:
     ruby_install_gems_user: "{{ ansible_ssh_user }}"
-  when: ruby_install_gems_user is not defined
+  when: (ruby_install_gems_user is not defined) and
+        (ansible_ssh_user is defined and ansible_version.major < 2)
+
+- name: Define ruby_install_gems_user.
+  set_fact:
+    ruby_install_gems_user: "{{ ansible_user }}"
+  when: (ruby_install_gems_user is not defined) and
+        (ansible_user is defined and ansible_version.major >= 2)
+
+- name: Define ruby_install_gems_user.
+  set_fact:
+    ruby_install_gems_user: "{{ ansible_user_id }}"
+  when: (ruby_install_gems_user is not defined) and
+        (
+          (ansible_version.major >= 2) and
+          (ansible_ssh_user is not defined) and
+          (ansible_user is not defined) and
+          (ansible_user_id is defined)
+        )
 
 - name: Install configured gems.
   gem: "name={{ item }} state=present"
