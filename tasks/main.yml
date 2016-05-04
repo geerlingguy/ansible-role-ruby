@@ -13,6 +13,7 @@
 # Install Bundler and configured gems.
 - name: Install Bundler.
   gem: name=bundler state=present user_install=no
+  when: ruby_install_bundler
 
 - name: Define ruby_install_gems_user.
   set_fact:
