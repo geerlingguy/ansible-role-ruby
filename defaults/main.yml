@@ -5,7 +5,7 @@ workspace: /root
 ruby_install_gems: []
 
 # The user account under which Ruby gems will be installed.
-# ruby_install_gems_user: username
+ruby_install_gems_user: "{{ ansible_user }}"
 
 # If set to TRUE, ruby will be installed from source, using the version set with
 # the 'ruby_version' variable instead of using a package.
