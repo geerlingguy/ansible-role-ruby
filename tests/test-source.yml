@@ -13,7 +13,7 @@
 
     - name: Ensure build dependencies are installed (RedHat).
       package: name=which state=installed
-      when: ansible_os_family == 'Redhat'
+      when: ansible_os_family == 'RedHat'
 
   roles:
     - role_under_test
