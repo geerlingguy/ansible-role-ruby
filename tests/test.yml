@@ -1,0 +1,14 @@
+---
+- hosts: all
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Ensure build dependencies are installed (RedHat).
+      package: name=which state=installed
+      when: ansible_os_family == 'Redhat'
+
+  roles:
+    - role_under_test
