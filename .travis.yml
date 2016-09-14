@@ -24,7 +24,7 @@ env:
   - distro: debian8
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    playbook: test-source.yml
+    playbook: test.yml
     ruby_version: 2.1.5
     ruby_path_prefix: /usr
 
