@@ -1,5 +1,5 @@
 ---
-sudo: required
+services: docker
 
 env:
   # Package install on all OSes.
@@ -42,30 +42,27 @@ env:
     ruby_version: 2.3.0
     ruby_path_prefix: /usr/local
 
-services:
-  - docker
-
 before_install:
   # Pull container.
-  - 'sudo docker pull geerlingguy/docker-${distro}-ansible:latest'
+  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
 
 script:
   - container_id=$(mktemp)
   # Run container in detached state.
-  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} geerlingguy/docker-${distro}-ansible:latest "${init}" > "${container_id}"'
+  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} geerlingguy/docker-${distro}-ansible:latest "${init}" > "${container_id}"'
 
   # Install dependencies.
-  - 'sudo docker exec "$(cat ${container_id})" ansible-galaxy install -r /etc/ansible/roles/role_under_test/tests/requirements.yml'
+  - 'docker exec "$(cat ${container_id})" ansible-galaxy install -r /etc/ansible/roles/role_under_test/tests/requirements.yml'
 
   # Ansible syntax check.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --syntax-check'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --syntax-check'
 
   # Test role.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook}'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook}'
 
   # Test role idempotence.
   - idempotence=$(mktemp)
-  - sudo docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} | tee -a ${idempotence}
+  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} | tee -a ${idempotence}
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
@@ -73,23 +70,19 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Make sure ruby is installed and at the correct version.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm which ruby'
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm test -x ${ruby_path_prefix}/bin/ruby'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm which ruby'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm test -x ${ruby_path_prefix}/bin/ruby'
 
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ruby --version'
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ${ruby_path_prefix}/bin/ruby --version | grep -qF ${ruby_version}'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ruby --version'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ${ruby_path_prefix}/bin/ruby --version | grep -qF ${ruby_version}'
 
   # Make sure bundler is installed.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ls -lah /usr/local/bin'
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm which bundle'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ls -lah /usr/local/bin'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm which bundle'
 
 after_failure:
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm which ruby'
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ruby --version'
-
-after_success:
-  # Clean up.
-  - 'sudo docker stop "$(cat ${container_id})"'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm which ruby'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ruby --version'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
