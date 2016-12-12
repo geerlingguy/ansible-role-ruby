@@ -26,26 +26,48 @@
     - libgdbm-dev
   when: ansible_os_family == 'Debian'
 
+- name: Check ruby version.
+  command: bash -lc "ruby --version"
+  register: current_ruby_version
+  failed_when: false
+  changed_when: false
+  always_run: true
+
 - name: Download ruby.
   get_url:
     url: "{{ ruby_download_url }}"
     dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+  when: "'{{ ruby_version }}' not in current_ruby_version.stdout"
 
 - name: Extract ruby.
   unarchive:
     src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
     dest: "{{ workspace }}/"
     copy: no
+  when: "'{{ ruby_version }}' not in current_ruby_version.stdout"
+
+- name: Remove old ruby version
+  file:
+    path: "/usr/local/bin/{{ item }}"
+    state: absent
+  with_items:
+    - erb
+    - gem
+    - irb
+    - rake
+    - rdoc
+    - ruby 
+  when: "'{{ ruby_version }}' not in current_ruby_version.stdout"
 
 - name: Build ruby.
   command: >
     {{ item }}
     chdir={{ workspace }}/ruby-{{ ruby_version }}
-    creates=/usr/local/bin/ruby
   with_items:
     - ./configure --enable-shared
     - make
     - make install
+  when: "'{{ ruby_version }}' not in current_ruby_version.stdout"
 
 - name: Add ruby symlinks.
   file:
