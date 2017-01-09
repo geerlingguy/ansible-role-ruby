@@ -2,6 +2,7 @@
 - hosts: all
 
   vars:
+    ruby_install_gems_user: root
     ruby_install_gems:
       - sass
 
