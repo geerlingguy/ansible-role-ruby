@@ -80,6 +80,9 @@ script:
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ls -lah /usr/local/bin'
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm which bundle'
 
+  # Make sure user installed gems are available.
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm bash --login -c "which sass"'
+
 after_failure:
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm which ruby'
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ruby --version'
