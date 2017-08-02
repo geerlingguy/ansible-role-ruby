@@ -5,6 +5,7 @@
     - '@development'
     - zlib-devel
     - openssl-static
+    - readline-devel
   when: ansible_os_family == 'RedHat'
 
 - name: Update apt cache (Debian).
