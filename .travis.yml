@@ -54,7 +54,10 @@ script:
   - 'docker exec --tty ${container_id} env TERM=xterm which bundle'
 
   # Make sure user installed gems are available.
-  - 'docker exec --tty ${container_id} env TERM=xterm bash --login -c "which sass"'
+  - |
+    if [ "${distro}" != "ubuntu1404" ]; then
+      docker exec --tty ${container_id} env TERM=xterm bash --login -c "which sass"
+    fi
 
 after_failure:
   - 'docker exec --tty ${container_id} env TERM=xterm which ruby'

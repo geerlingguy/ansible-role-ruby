@@ -4,12 +4,19 @@
   vars:
     ruby_install_gems_user: root
     ruby_install_gems:
-      - json
+      - sass
 
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
+
+    - name: Use different gems for older OSes (Ubuntu 14.04).
+      set_fact:
+        ruby_install_gems: ['json']
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - ansible_distribution_version == '14.04'
 
   roles:
     - role_under_test
