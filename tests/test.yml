@@ -4,7 +4,7 @@
   vars:
     ruby_install_gems_user: root
     ruby_install_gems:
-      - sass
+      - json
 
   pre_tasks:
     - name: Update apt cache.
