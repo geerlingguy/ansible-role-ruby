@@ -11,5 +11,6 @@
   apt: "name={{ item }} state=present"
   with_items:
     - ruby-full
+    - ruby-dev
     - "{{ ruby_rubygems_package_name }}"
     - build-essential
