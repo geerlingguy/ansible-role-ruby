@@ -5,6 +5,7 @@
     ruby_install_gems_user: root
     ruby_install_gems:
       - sass
+    ruby_gems_bin_path: /root/.gem/ruby/bin
 
   pre_tasks:
     - name: Update apt cache.
@@ -17,6 +18,14 @@
       when:
         - ansible_distribution == 'Ubuntu'
         - ansible_distribution_version == '14.04'
+
+    - name: Add rubygems bin dir to system-wide $PATH.
+      lineinfile:
+        dest: /etc/environment
+        state: present
+        backrefs: yes
+        regexp: 'PATH=(["]*)((?!.*?{{ ruby_gems_bin_path }}).*?)(["]*)$'
+        line: "PATH=\1\2:{{ ruby_gems_bin_path }}\3"
 
   roles:
     - role_under_test
