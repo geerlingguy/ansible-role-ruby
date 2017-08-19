@@ -43,7 +43,7 @@
     chdir={{ workspace }}/ruby-{{ ruby_version }}
     creates=/usr/local/bin/ruby
   with_items:
-    - ./configure --enable-shared
+    - ./configure --enable-shared {{ ruby_configure_options }}
     - make
     - make install
 

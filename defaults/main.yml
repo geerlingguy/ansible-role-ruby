@@ -18,3 +18,6 @@ ruby_version: 2.4.1
 
 # Default should usually work, but this will be overridden on Ubuntu 14.04.
 ruby_rubygems_package_name: rubygems
+
+# Options for ./configure (installation from source only)
+ruby_configure_options: ""
