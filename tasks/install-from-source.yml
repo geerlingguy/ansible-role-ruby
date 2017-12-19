@@ -44,6 +44,7 @@
     repo: "{{ ruby_download_git }}"
     dest: "{{ workspace }}/ruby-{{ ruby_version }}"
     version: "ruby_{{ruby_version}}"
+    depth: 1
   when: ruby_download_git != False
 
 - name: Build configure
