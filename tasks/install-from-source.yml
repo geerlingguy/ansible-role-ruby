@@ -48,8 +48,9 @@
 
 - name: Build configure
   shell: autoconf
-    creates: "{{ workspace }}/ruby-{{ ruby_version }}/configure"
+  args:
     chdir: "{{ workspace }}/ruby-{{ ruby_version }}"
+    creates: "{{ workspace }}/ruby-{{ ruby_version }}/configure"
   when: ruby_download_git != False
    
 
