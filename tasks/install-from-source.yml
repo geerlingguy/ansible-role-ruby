@@ -43,7 +43,15 @@
   git:
     repo: "{{ ruby_download_git }}"
     dest: "{{ workspace }}/ruby-{{ ruby_version }}"
+    branch: "{{ruby_version}}"
   when: ruby_download_git != False
+
+- name: Build configure
+  shell: autoconf
+    creates: "{{ workspace }}/ruby-{{ ruby_version }}/configure"
+    chdir: "{{ workspace }}/ruby-{{ ruby_version }}"
+  when: ruby_download_git != False
+   
 
 - name: Build ruby.
   command: >
