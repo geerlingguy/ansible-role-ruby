@@ -24,6 +24,7 @@
     - libffi-dev
     - libgdbm3
     - libgdbm-dev
+    - autoconf
   when: ansible_os_family == 'Debian'
 
 - name: Download ruby.
