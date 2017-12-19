@@ -30,20 +30,20 @@
   get_url:
     url: "{{ ruby_download_url }}"
     dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
-  when: ruby_download_url
+  when: ruby_download_url != False
 
 - name: Extract ruby.
   unarchive:
     src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
     dest: "{{ workspace }}/"
     copy: no
-  when: ruby_download_url
+  when: ruby_download_url != False
 
 - name: Clone Ruby
   git:
     repo: "{{ ruby_download_git }}"
     dest: "{{ workspace }}/ruby-{{ ruby_version }}"
-  when: ruby_download_git
+  when: ruby_download_git != False
 
 - name: Build ruby.
   command: >
