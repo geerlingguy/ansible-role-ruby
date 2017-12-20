@@ -53,8 +53,8 @@
     creates=/usr/local/bin/ruby
   with_items:
     - "{{ ruby_source_configure_command }}"
-    - make
-    - make install
+    - "{{ ruby_source_make_command }}"
+    - "{{ ruby_source_make_command }} install"
 
 - name: Add ruby symlinks.
   file:
@@ -85,14 +85,12 @@
     creates: "{{ workspace }}/ruby-{{ ruby_git_version }}/configure"
   when: ruby_download_git != False
    
-
 - name: Rebuild ruby from git.
   command: >
     {{ item }}
     chdir={{ workspace }}/ruby-{{ ruby_git_version }}
-    creates=/usr/local/bin/ruby
   with_items:
     - "{{ ruby_source_configure_command }}"
-    - make
-    - make install
+    - "{{ ruby_source_make_command }}"
+    - "{{ ruby_source_make_command }} install"
   when: ruby_download_git != False
