@@ -25,6 +25,7 @@
     - libgdbm3
     - libgdbm-dev
     - autoconf
+    - bison
 
 - name: Download ruby.
   get_url:
