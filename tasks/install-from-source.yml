@@ -74,22 +74,22 @@
 - name: Clone Ruby
   git:
     repo: "{{ ruby_download_git }}"
-    dest: "{{ workspace }}/ruby-{{ ruby_git_version }}"
-    version: "ruby_{{ruby_git_version}}"
+    dest: "{{ workspace }}/ruby-{{ ruby_git_branch }}"
+    version: "{{ruby_git_branch}}"
     depth: 1
   when: ruby_download_git != False
 
 - name: Build configure from git
   shell: autoconf
   args:
-    chdir: "{{ workspace }}/ruby-{{ ruby_git_version }}"
-    creates: "{{ workspace }}/ruby-{{ ruby_git_version }}/configure"
+    chdir: "{{ workspace }}/ruby-{{ ruby_git_branch }}"
+    creates: "{{ workspace }}/ruby-{{ ruby_git_branch }}/configure"
   when: ruby_download_git != False
    
 - name: Rebuild ruby from git.
   command: >
     {{ item }}
-    chdir={{ workspace }}/ruby-{{ ruby_git_version }}
+    chdir={{ workspace }}/ruby-{{ ruby_git_branch }}
   with_items:
     - "{{ ruby_source_configure_command }}"
     - "{{ ruby_source_make_command }}"
