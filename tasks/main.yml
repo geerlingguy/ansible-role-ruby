@@ -16,6 +16,21 @@
 - include: install-from-source.yml
   when: ruby_install_from_source == True and ruby_configure_only == False
 
+- name: Add ruby symlinks.
+  file:
+    src: "/usr/local/bin/{{ item }}"
+    dest: "/usr/bin/{{ item }}"
+    state: link
+    force: yes
+  with_items:
+    - erb
+    - gem
+    - irb
+    - rake
+    - rdoc
+    - ruby
+  when: ruby_install_from_source == True
+
 - name: Add user installed RubyGems bin directory to global $PATH.
   copy:
     src: rubygems.sh

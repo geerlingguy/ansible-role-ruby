@@ -56,20 +56,6 @@
     - "{{ ruby_source_configure_command }}"
     - "{{ ruby_source_make_command }}"
     - "{{ ruby_source_make_command }} install"
-
-- name: Add ruby symlinks.
-  file:
-    src: "/usr/local/bin/{{ item }}"
-    dest: "/usr/bin/{{ item }}"
-    state: link
-    force: yes
-  with_items:
-    - erb
-    - gem
-    - irb
-    - rake
-    - rdoc
-    - ruby
   
 - name: Clone Ruby
   git:
