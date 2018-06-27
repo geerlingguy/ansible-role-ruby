@@ -4,15 +4,17 @@
   when:
     - ruby_install_from_source == False
     - ansible_os_family == 'RedHat'
+    - ruby_configure_only == False
 
 - include: setup-Debian.yml
   when:
     - ruby_install_from_source == False
     - ansible_os_family == 'Debian'
+    - ruby_configure_only == False
 
 # Install ruby from source when ruby_install_from_source is true.
 - include: install-from-source.yml
-  when: ruby_install_from_source == True
+  when: ruby_install_from_source == True and ruby_configure_only == False
 
 - name: Add user installed RubyGems bin directory to global $PATH.
   copy:

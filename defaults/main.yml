@@ -23,3 +23,4 @@ ruby_rubygems_package_name: rubygems
 
 # Configure command for ./configure (installation from source only)
 ruby_source_configure_command: "./configure --enable-shared"
+ruby_configure_only: False
