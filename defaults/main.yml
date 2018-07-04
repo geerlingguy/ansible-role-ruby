@@ -14,7 +14,7 @@ ruby_install_gems_user: "{{ ansible_user }}"
 # the 'ruby_version' variable instead of using a package.
 ruby_install_from_source: false
 ruby_version: 2.5.1
-ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.5/ruby-{{ruby_version}}.tar.gz
+ruby_download_url: http://cache.ruby-lang.org/pub/ruby/{{ruby_version | regex_search('^(\\d+).(\\d+)') | list | first}}/ruby-{{ruby_version}}.tar.gz
 ruby_download_git: False
 ruby_source_make_command: "make"
 
