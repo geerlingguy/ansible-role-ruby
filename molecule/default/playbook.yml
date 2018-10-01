@@ -1,0 +1,36 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    ruby_install_gems_user: root
+    ruby_install_gems:
+      - sass
+    ruby_gems_bin_path: /root/.gem/ruby/bin
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+    - name: Add rubygems bin dir to system-wide $PATH.
+      copy:
+        dest: /etc/profile.d/ruby.sh
+        content: 'PATH=$PATH:{{ ruby_gems_bin_path }}'
+
+  roles:
+    - role: geerlingguy.ruby
+
+  post_tasks:
+    - name: Verify Ruby is installed.
+      command: ruby --version
+      changed_when: false
+
+    - name: Verify Bundler is installed.
+      command: bundle --version
+      changed_when: false
+
+    - name: Make sure user installed gems are present.
+      command: which sass
+      changed_when: false

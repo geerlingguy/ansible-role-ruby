@@ -1,14 +1,15 @@
 ---
 - name: Install packages required to build ruby (RedHat).
-  yum: "name={{ item }} state=present"
-  with_items:
-    - '@development'
-    - zlib-devel
-    - openssl-static
+  yum:
+    name:
+      - '@development'
+      - zlib-devel
+      - openssl-static
+    state: present
   when: ansible_os_family == 'RedHat'
 
 - name: Update apt cache (Debian).
-  apt: update_cache=yes cache_valid_time=86400
+  apt: update_cache=true cache_valid_time=86400
   when: ansible_os_family == 'Debian'
 
 - name: Install packages required to build ruby (Debian).
@@ -34,7 +35,7 @@
   unarchive:
     src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
     dest: "{{ workspace }}/"
-    copy: no
+    copy: false
 
 - name: Build ruby.
   command: >
@@ -51,7 +52,7 @@
     src: "/usr/local/bin/{{ item }}"
     dest: "/usr/bin/{{ item }}"
     state: link
-    force: yes
+    force: true
   with_items:
     - erb
     - gem
