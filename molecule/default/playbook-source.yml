@@ -22,10 +22,10 @@
       command: ruby --version
       changed_when: false
 
-    - name: Verify Bundler is installed.
-      command: bundle --version
-      changed_when: false
+    # - name: Verify Bundler is installed.
+    #   command: bundle --version
+    #   changed_when: false
 
-    - name: Make sure user installed gems are present.
-      command: which sass
-      changed_when: false
+    # - name: Make sure user installed gems are present.
+    #   command: which sass
+    #   changed_when: false
