@@ -9,7 +9,7 @@
 
 - name: Install ruby and other required dependencies.
   apt:
-    name: "{{ item }}"
+    name: "{{ ruby_packages }}"
     state: present
 
 - name: Install rubygems.
