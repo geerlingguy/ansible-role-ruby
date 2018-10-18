@@ -1,4 +1,9 @@
 ---
+- name: Define ruby_build_packages.
+  set_fact:
+    ruby_build_packages: "{{ __ruby_build_packages }}"
+  when: ruby_build_packages is not defined
+
 - name: Install packages required to build ruby.
   yum:
     name: "{{ ruby_build_packages }}"

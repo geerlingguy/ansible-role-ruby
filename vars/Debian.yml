@@ -1,12 +1,12 @@
 ---
-ruby_packages:
+__ruby_packages:
   - ruby-full
   - ruby-dev
   - build-essential
   - autogen
   - autoconf
   - libtool
-ruby_build_packages:
+__ruby_build_packages:
   - build-essential
   - zlib1g-dev
   - libssl-dev
