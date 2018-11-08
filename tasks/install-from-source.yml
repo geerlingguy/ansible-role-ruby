@@ -10,6 +10,8 @@
 - name: Update apt cache (Debian).
   apt: update_cache=yes cache_valid_time=86400
   when: ansible_os_family == 'Debian'
+  tags:
+   - package_install
 
 - name: Install packages required to build ruby (Debian).
   apt: "name={{ item }} state=present"
@@ -26,6 +28,8 @@
     - libgdbm-dev
     - autoconf
     - bison
+  tags:
+   - package_install
 
 - name: Download ruby.
   get_url:
