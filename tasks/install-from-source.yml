@@ -5,6 +5,7 @@
   when: ruby_build_packages is not defined
 
 - name: Install packages required to build ruby.
+  no_log: true
   yum:
     name: "{{ ruby_build_packages }}"
     state: present
@@ -15,6 +16,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install packages required to build ruby (Debian).
+  no_log: true
   apt:
     name: "{{ ruby_build_packages }}"
     state: present
@@ -32,6 +34,7 @@
     copy: false
 
 - name: Build ruby.
+  no_log: true
   command: >
     {{ item }}
     chdir={{ workspace }}/ruby-{{ ruby_version }}
