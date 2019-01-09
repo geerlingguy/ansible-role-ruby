@@ -3,6 +3,9 @@ workspace: /root
 
 # Whether this role should install Bundler.
 ruby_install_bundler: true
+# Defaults to latest Bundler release. Set the 'ruby_bundler_version' variable
+# to install a specififc version of Bundler
+ruby_bundler_version: ''
 
 # A list of Ruby gems to install.
 ruby_install_gems: []
