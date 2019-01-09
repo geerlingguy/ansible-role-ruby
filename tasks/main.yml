@@ -34,7 +34,7 @@
     name: bundler
     version: "{{ ruby_bundler_version }}"
     state: present
-    user_install: no
+    user_install: false
   when: ruby_install_bundler
 
 - name: Install configured gems.
