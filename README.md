@@ -34,11 +34,15 @@ By default, this role will install whatever version of ruby is available through
 
     ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.4.4.tar.gz
 
-The URL from which Ruby will be downloaded (only used if `ruby_install_from_source` is `True`).
+The URL from which Ruby will be downloaded (only used if `ruby_install_from_source` is `true`).
 
     ruby_version: 2.5.1
 
-The version of ruby that will be installed (only used if `ruby_install_from_source` is `True`).
+The version of ruby that will be installed (only used if `ruby_install_from_source` is `true`).
+
+    ruby_source_configure_command: ./configure --enable-shared
+
+The `configure` command that will be run (only used if `ruby_install_from_source` is `true`).
 
     ruby_rubygems_package_name: rubygems
 

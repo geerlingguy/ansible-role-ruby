@@ -15,6 +15,7 @@ ruby_install_gems_user: "{{ ansible_user }}"
 ruby_install_from_source: false
 ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.1.tar.gz
 ruby_version: 2.5.1
+ruby_source_configure_command: ./configure --enable-shared
 
 # Default should usually work, but this will be overridden on Ubuntu 14.04.
 ruby_rubygems_package_name: rubygems
