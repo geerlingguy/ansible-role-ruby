@@ -6,7 +6,7 @@
   vars:
     ruby_install_gems_user: root
     ruby_install_gems:
-      - sass
+      - json
     ruby_gems_bin_path: /root/.gem/ruby/bin
 
   pre_tasks:
