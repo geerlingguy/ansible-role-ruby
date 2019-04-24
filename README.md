@@ -1,6 +1,6 @@
 # Ansible Role: Ruby
 
-[![Build Status](https://github.com/dedwards-tech/ansible-role-ruby)
+[![Build Status](https://github.com/dedwards-tech/ansible-role-ruby)]
 
 Installs Ruby v2.6.2 and bundler gem on Linux from source code.
 
