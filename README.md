@@ -20,6 +20,10 @@ The location where temporary files will be downloaded in preparation for Ruby in
 
 Whether this role should install [Bundler](http://bundler.io/).
 
+    ruby_bundler_version: 2.0.1
+
+The version of Bundler that will be installed.
+
     ruby_install_gems: []
 
 A list of Ruby gems to install (just the name of the gem to be installed). This is meant as a simple convenience, and will only install the latest version of the gem. If you need to install gems with more options or specificity, you can do so elsewhere in your playbook.
