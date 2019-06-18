@@ -20,7 +20,7 @@
 
 # Install ruby from source when ruby_install_from_source is true.
 - include_tasks: install-from-source.yml
-  when: ruby_install_from_source
+  when: ruby_install_from_source | bool
 
 - name: Add user installed RubyGems bin directory to global $PATH.
   copy:
@@ -31,7 +31,7 @@
 # Install Bundler and configured gems.
 - name: Install Bundler.
   gem: name=bundler state=present user_install=no
-  when: ruby_install_bundler
+  when: ruby_install_bundler | bool
 
 - name: Install configured gems.
   gem:
