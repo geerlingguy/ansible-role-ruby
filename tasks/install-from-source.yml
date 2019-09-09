@@ -23,18 +23,18 @@
 - name: Download ruby.
   get_url:
     url: "{{ ruby_download_url }}"
-    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+    dest: "{{ ruby_workspace }}/ruby-{{ ruby_version }}.tar.gz"
 
 - name: Extract ruby.
   unarchive:
-    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
-    dest: "{{ workspace }}/"
+    src: "{{ ruby_workspace }}/ruby-{{ ruby_version }}.tar.gz"
+    dest: "{{ ruby_workspace }}/"
     copy: false
 
 - name: Build ruby.
   command: >
     {{ item }}
-    chdir={{ workspace }}/ruby-{{ ruby_version }}
+    chdir={{ ruby_workspace }}/ruby-{{ ruby_version }}
     creates=/usr/local/bin/ruby
   with_items:
     - "{{ ruby_source_configure_command }}"

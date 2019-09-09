@@ -1,5 +1,5 @@
 ---
-workspace: /root
+ruby_workspace: /root
 
 # Whether this role should install Bundler.
 ruby_install_bundler: true

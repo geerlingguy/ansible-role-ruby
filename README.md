@@ -12,7 +12,7 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    workspace: /root
+    ruby_workspace: /root
 
 The location where temporary files will be downloaded in preparation for Ruby installation.
 
