@@ -35,7 +35,9 @@
 
 - name: Install configured gems.
   gem:
-    name: "{{ item }}"
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    user_install: "{{ item.user_install | default(omit) }}"
     state: present
   become: true
   become_user: "{{ ruby_install_gems_user }}"
