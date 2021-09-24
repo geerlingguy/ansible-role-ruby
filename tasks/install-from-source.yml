@@ -20,6 +20,11 @@
     state: present
   when: ansible_os_family == 'Debian'
 
+- name: Ensure that /var/cache/ansible/ exists
+  file:
+    path: "/var/cache/ansible/"
+    state: directory
+
 - name: Download ruby.
   get_url:
     url: "{{ ruby_download_url }}"
@@ -36,11 +41,13 @@
   command: >
     {{ item }}
     chdir={{ workspace }}/ruby-{{ ruby_version }}
-    creates=/usr/local/bin/ruby
+    creates=/var/cache/ansible/ruby-{{ ruby_version }}.check
+    warn=false
   with_items:
     - "{{ ruby_source_configure_command }}"
     - make
     - make install
+    - touch /var/cache/ansible/ruby-{{ ruby_version }}.check
 
 - name: Add ruby symlinks.
   file:  # noqa 208
