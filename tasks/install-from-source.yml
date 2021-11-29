@@ -25,29 +25,39 @@
     path: "/var/cache/ansible/"
     state: directory
 
-- name: Download ruby.
-  get_url:
-    url: "{{ ruby_download_url }}"
-    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+- name: Check if ruby is up-to-date
+  stat:
+    path: "/var/cache/ansible/ruby-{{ ruby_version }}.check"
+  register: ruby_version_marker
 
-- name: Extract ruby.
-  unarchive:
-    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
-    dest: "{{ workspace }}/"
-    copy: false
-    mode: 0755
+- name: Download, extract, and install ruby
+  when: not ruby_version_marker.stat.exists
+  block:
+    - name: Download ruby.
+      get_url:
+        url: "{{ ruby_download_url }}"
+        dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
 
-- name: Build ruby.
-  command: >
-    {{ item }}
-    chdir={{ workspace }}/ruby-{{ ruby_version }}
-    creates=/var/cache/ansible/ruby-{{ ruby_version }}.check
-    warn=false
-  with_items:
-    - "{{ ruby_source_configure_command }}"
-    - make
-    - make install
-    - touch /var/cache/ansible/ruby-{{ ruby_version }}.check
+    - name: Extract ruby.
+      unarchive:
+        src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+        dest: "{{ workspace }}/"
+        copy: false
+        mode: 0755
+
+    - name: Build ruby.
+      command: >
+        {{ item }}
+        chdir={{ workspace }}/ruby-{{ ruby_version }}
+      with_items:
+        - "{{ ruby_source_configure_command }}"
+        - make
+        - make install
+
+    - name: Touch install-marker
+      file:
+        path: "/var/cache/ansible/ruby-{{ ruby_version }}.check"
+        state: touch
 
 - name: Add ruby symlinks.
   file:  # noqa 208
