@@ -24,6 +24,16 @@ Whether this role should install [Bundler](http://bundler.io/).
 
 A list of Ruby gems to install (just the name of the gem to be installed). This is meant as a simple convenience, and will only install the latest version of the gem. If you need to install gems with more options or specificity, you can do so elsewhere in your playbook.
 
+You can also use a dictionary for each gem that allows setting the `version` and
+`user_install` keys for the `gem` Ansible module.  For example:
+
+    ruby_install_gems:
+      - name: bundler
+        version: '< 2'
+        user_install: false
+
+You can mix the two syntaxes, using either a dict or a string (the gem name) for each gem.
+
     ruby_install_gems_user: username
 
 The user account under which Ruby gems will be installed. Defaults to the `ansible_ssh_user` if not set.
