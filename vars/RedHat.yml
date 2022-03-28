@@ -3,8 +3,8 @@ __ruby_packages:
   - ruby
   - ruby-devel
   - "{{ ruby_rubygems_package_name }}"
-  - '@development'
+  - '@development tools'
 __ruby_build_packages:
-  - '@development'
+  - '@development tools'
   - zlib-devel
   - openssl-static
