@@ -29,16 +29,19 @@
     mode: 0644
 
 # Install Bundler and configured gems.
-- name: Install Bundler.
-  gem: name=bundler state=present user_install=no
-  when: ruby_install_bundler
+- name: Install Bundler and configured gems
+  when: not ansible_check_mode
+  block:
+  - name: Install Bundler.
+    gem: name=bundler state=present user_install=no
+    when: ruby_install_bundler
 
-- name: Install configured gems.
-  gem:
-    name: "{{ item.name | default(item) }}"
-    version: "{{ item.version | default(omit) }}"
-    user_install: "{{ item.user_install | default(omit) }}"
-    state: present
-  become: true
-  become_user: "{{ ruby_install_gems_user }}"
-  with_items: "{{ ruby_install_gems }}"
+  - name: Install configured gems.
+    gem:
+      name: "{{ item.name | default(item) }}"
+      version: "{{ item.version | default(omit) }}"
+      user_install: "{{ item.user_install | default(omit) }}"
+      state: present
+    become: true
+    become_user: "{{ ruby_install_gems_user }}"
+    with_items: "{{ ruby_install_gems }}"
