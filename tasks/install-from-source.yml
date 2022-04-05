@@ -31,7 +31,9 @@
   register: ruby_version_marker
 
 - name: Download, extract, and install ruby
-  when: not ruby_version_marker.stat.exists
+  when:
+    - not ruby_version_marker.stat.exists
+    - not ansible_check_mode
   block:
     - name: Download ruby.
       get_url:
