@@ -30,7 +30,10 @@
 
 # Install Bundler and configured gems.
 - name: Install Bundler.
-  gem: name=bundler state=present user_install=no
+  gem:
+    name: bundler
+    state: present
+    user_install: false
   when: ruby_install_bundler
 
 - name: Install configured gems.
