@@ -48,8 +48,6 @@ jobs:
           - distro: debian11
             playbook: converge.yml
 
-          - distro: centos7
-            playbook: source-install.yml
           - distro: ubuntu2004
             playbook: source-install.yml
 
