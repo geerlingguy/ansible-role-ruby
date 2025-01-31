@@ -1,6 +1,6 @@
 # Ansible Role: Ruby
 
-[![CI](https://github.com/geerlingguy/ansible-role-ruby/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-ruby/actions?query=workflow%3ACI)
+[![CI](https://github.com/geerlingguy/ansible-role-ruby/actions/workflows/ci.yml/badge.svg)](https://github.com/geerlingguy/ansible-role-ruby/actions/workflows/ci.yml)
 
 Installs Ruby and bundler gem on Linux.
 
