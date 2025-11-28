@@ -1,6 +1,6 @@
 ---
 - name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: "{{ ansible_facts.os_family }}.yml"
 
 - name: Define ruby_packages.
   set_fact:
@@ -11,12 +11,12 @@
 - include_tasks: setup-RedHat.yml
   when:
     - not ruby_install_from_source
-    - ansible_os_family == 'RedHat'
+    - ansible_facts.os_family == 'RedHat'
 
 - include_tasks: setup-Debian.yml
   when:
     - not ruby_install_from_source
-    - ansible_os_family == 'Debian'
+    - ansible_facts.os_family == 'Debian'
 
 # Install ruby from source when ruby_install_from_source is true.
 - include_tasks: install-from-source.yml
